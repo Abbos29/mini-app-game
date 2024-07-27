@@ -32,7 +32,7 @@ const Main = () => {
                 images = ['./hero-bottom-1.png', './hero-bottom-2.png', './hero-bottom-3.png', './hero-bottom-4.png', './hero-bottom-5.png'];
         }
 
-        cycleHeroImages(images, 200);
+        cycleHeroImages(images, 600);
     };
 
     const cycleHeroImages = (images, duration) => {
