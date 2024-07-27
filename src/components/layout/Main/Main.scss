@@ -1,0 +1,99 @@
+.wrap {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 50px;
+}
+
+.game {
+    display: grid;
+    place-items: center;
+    grid-auto-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        ". owl-top ."
+        "owl-left hero owl-right"
+        ". owl-bottom .";
+
+    .hero {
+        grid-area: hero;
+    }
+    .owl-top {
+        grid-area: owl-top;
+    }
+    .owl-right {
+        grid-area: owl-right;
+    }
+    .owl-bottom {
+        grid-area: owl-bottom;
+    }
+    .owl-left {
+        grid-area: owl-left;
+    }
+}
+
+.hero {
+    img {
+        width: 130px;
+        height: 130px;
+        object-fit: contain;
+    }
+}
+
+.owl {
+    position: relative;
+
+    &:focus {
+        &::after {
+            // display: block;
+        }
+    }
+
+    &.wop-anim {
+        &::after {
+            animation: wop-anim-1 0.2s;
+        }
+    }
+
+    &::after {
+        content: "";
+
+        width: 75px;
+        height: 75px;
+        background-image: url(./wop-icon.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: block;
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        scale: 0;
+
+        transition: all 1s;
+    }
+}
+
+@keyframes wop-anim-1 {
+    from {
+        scale: 0;
+    }
+    to {
+        scale: 1;
+    }
+}
+
+
+
+.owl.hidden {
+    display: none;
+}
+
+.owl.visible {
+    display: block;
+}
