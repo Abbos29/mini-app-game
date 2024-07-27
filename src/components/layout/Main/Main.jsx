@@ -82,7 +82,7 @@ const Main = () => {
                             </div>
                         ))}
                     </div>
-                    <button onClick={handleRestart}>Restart Game</button>
+                    <button className='btn' onClick={handleRestart}>Restart Game</button>
                 </div>
             </div>
         </section>
