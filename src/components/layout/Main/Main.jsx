@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Main.scss';
 
 const Main = () => {
     const [heroSrc, setHeroSrc] = useState('./hero-bottom.png');
     const [point, setPoint] = useState(0);
     const [visibleOwl, setVisibleOwl] = useState('bottom');
+
+    const imagePaths = {
+        top: ['./hero-top-1.png', './hero-top-2.png', './hero-top-3.png', './hero-top-4.png', './hero-top-5.png'],
+        right: ['./hero-right-1.png', './hero-right-2.png', './hero-right-3.png', './hero-right-4.png', './hero-right.png'],
+        bottom: ['./hero-bottom-1.png', './hero-bottom-2.png', './hero-bottom-3.png', './hero-bottom-4.png', './hero-bottom-5.png'],
+        left: ['./hero-left-1.png', './hero-left-2.png', './hero-left-3.png', './hero-left-4.png', './hero-left-5.png']
+    };
+
+    useEffect(() => {
+        Object.values(imagePaths).flat().forEach(src => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
 
     const handlePoint = (direction) => {
         setPoint(point + 1);
@@ -14,24 +28,7 @@ const Main = () => {
     };
 
     const handleOwlClick = (direction) => {
-        let images = [];
-        switch (direction) {
-            case 'top':
-                images = ['./hero-top-1.png', './hero-top-2.png', './hero-top-3.png', './hero-top-4.png', './hero-top-5.png'];
-                break;
-            case 'right':
-                images = ['./hero-right-1.png', './hero-right-2.png', './hero-right-3.png', './hero-right-4.png', './hero-right.png'];
-                break;
-            case 'bottom':
-                images = ['./hero-bottom-1.png', './hero-bottom-2.png', './hero-bottom-3.png', './hero-bottom-4.png', './hero-bottom-5.png'];
-                break;
-            case 'left':
-                images = ['./hero-left-1.png', './hero-left-2.png', './hero-left-3.png', './hero-left-4.png', './hero-left-5.png'];
-                break;
-            default:
-                images = ['./hero-bottom-1.png', './hero-bottom-2.png', './hero-bottom-3.png', './hero-bottom-4.png', './hero-bottom-5.png'];
-        }
-
+        const images = imagePaths[direction] || imagePaths.bottom;
         cycleHeroImages(images, 600);
     };
 
