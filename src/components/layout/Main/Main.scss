@@ -6,6 +6,10 @@
     padding-top: 50px;
 }
 
+body {
+    overflow: hidden;
+}
+
 .game {
     display: grid;
     place-items: center;
@@ -23,15 +27,31 @@
     }
     .owl-top {
         grid-area: owl-top;
+        &.hit {
+            translate: 0 -1100px;
+            rotate: 360deg;
+        }
     }
     .owl-right {
         grid-area: owl-right;
+        &.hit {
+            translate: 1100px 0;
+            rotate: 360deg;
+        }
     }
     .owl-bottom {
         grid-area: owl-bottom;
+        &.hit {
+            translate: 0 1100px;
+            rotate: 360deg;
+        }
     }
     .owl-left {
         grid-area: owl-left;
+        &.hit {
+            translate: -1100px 0;
+            rotate: 360deg;
+        }
     }
 }
 
@@ -45,6 +65,7 @@
 
 .owl {
     position: relative;
+    transition: all .8s;
 
     &:focus {
         &::after {

@@ -5,6 +5,8 @@ const Main = () => {
     const [heroSrc, setHeroSrc] = useState('./hero-bottom.png');
     const [point, setPoint] = useState(0);
     const [visibleOwl, setVisibleOwl] = useState('bottom');
+    const [owlHitClass, setOwlHitClass] = useState('');
+    const [wopAnimClass, setWopAnimClass] = useState('');
 
     const imagePaths = {
         top: ['./hero-top-1.png', './hero-top-2.png', './hero-top-3.png', './hero-top-4.png', './hero-top-5.png'],
@@ -22,14 +24,25 @@ const Main = () => {
 
     const handlePoint = (direction) => {
         setPoint(point + 1);
-        const newDirection = getRandomDirection(direction);
-        setVisibleOwl(newDirection);
+        setOwlHitClass('hit'); // Добавляем класс удара
         handleOwlClick(direction);
+
+        setTimeout(() => {
+            setOwlHitClass('');
+            const newDirection = getRandomDirection(direction);
+            setVisibleOwl(newDirection);
+        }, 2000); // Меняем сову через 2 секунды
     };
 
     const handleOwlClick = (direction) => {
         const images = imagePaths[direction] || imagePaths.bottom;
         cycleHeroImages(images, 600);
+
+        // Добавляем класс wop-anim на 1 секунду
+        setWopAnimClass('wop-anim');
+        setTimeout(() => {
+            setWopAnimClass('');
+        }, 1000);
     };
 
     const cycleHeroImages = (images, duration) => {
@@ -61,6 +74,7 @@ const Main = () => {
         setPoint(0);
         setHeroSrc('./hero-bottom.png');
         setVisibleOwl('bottom');
+        setWopAnimClass(''); // Убираем анимацию при перезапуске
     };
 
     return (
@@ -75,7 +89,7 @@ const Main = () => {
                         {['top', 'right', 'bottom', 'left'].map((direction) => (
                             <div
                                 key={direction}
-                                className={`owl owl-${direction} ${visibleOwl === direction ? 'visible' : 'hidden'} ${visibleOwl === direction ? 'wop-anim' : ''}`}
+                                className={`owl owl-${direction} ${visibleOwl === direction ? 'visible' : 'hidden'} ${owlHitClass} ${visibleOwl === direction ? wopAnimClass : ''}`}
                                 onClick={() => handlePoint(direction)}
                             >
                                 <img src="./owl.png" alt="owl" />
